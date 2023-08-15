@@ -52,4 +52,6 @@ const cargarPeliculas = async() => {
 
 }
 
+// comentario
+
 cargarPeliculas();
