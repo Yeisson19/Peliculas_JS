@@ -3,7 +3,7 @@ const CargandoPeli = async () =>{
 	//Tratando
 	try{
 		 		//Promesa
-		const api = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=e1d864e178ea9e978af97c6a0d6b2acb&language=es-ES&append_to_response=videos,images`);
+		const api = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=e1d864e178ea9e978af97c6a0d6b2acb&language=es-ES&append_to_response=videos,images&page=${pag}`);
 		console.log(api);
 
 		if(api.status == 200){
@@ -20,7 +20,7 @@ const CargandoPeli = async () =>{
 					<div class="pelicula">
 						<img class="poster" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}">
 						<h3 class="titulo">${peli.title}</h3>
-						<p class="">${peli.overview}</p>
+						<p class="blockquote-footer">${peli.overview}</p>
 					</div>
 				`;
 			});
@@ -42,6 +42,26 @@ const CargandoPeli = async () =>{
 	 
 
 }
+
+var pag=1;
+const btnAnterior = document.getElementById('btnAnterior');
+const btnSiguiente = document.getElementById('btnSiguiente');
+
+btnAnterior.addEventListener('click',()=>{
+	
+	if( pag > 1 ){
+		pag -= 1;
+		CargandoPeli();
+	}
+});
+
+btnSiguiente.addEventListener('click',()=>{
+
+	if(pag < 1000){
+		pag += 1;
+		CargandoPeli();
+	}
+});
 
 //callfuntion
 CargandoPeli();
