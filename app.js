@@ -1,3 +1,4 @@
+
 //Cargando API -- Funcion Asincrona
 const CargandoPeli = async () =>{
 	//Tratando
@@ -17,7 +18,7 @@ const CargandoPeli = async () =>{
 			var vista="";
 			datos.results.forEach(peli => {
 				 vista += `
-					<div class="pelicula">
+					<div onclick="info()" class="pelicula" id="${peli.id}">
 						<img class="poster" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}">
 						<h3 class="titulo">${peli.title}</h3>
 						<p class="blockquote-footer">${peli.overview}</p>
@@ -25,8 +26,8 @@ const CargandoPeli = async () =>{
 				`;
 			});
 
-  
-			const contenedor = document.getElementById('contenedor').innerHTML = vista;
+			document.getElementById('contenedor').innerHTML = vista;
+
 			console.log("exitosa coneccion");
 		}
 		else{
@@ -39,10 +40,49 @@ const CargandoPeli = async () =>{
 	catch(error){
 			console.log(error);
 	}
-	 
+
+	
 
 }
+//add event
+const contenedor = getEle;
 
+// var divPeli;
+// console.log(divPeli);
+
+// divPeli.addEventListener('click', () =>{
+
+// 	var id=divPeli.id;
+// 	console.log(id);
+// });
+
+
+// function info(peli){
+// 	console.log(peli)
+// }
+ 
+
+const btnopen= document.getElementById('open');
+
+btnopen.addEventListener('show.bs.modal',e =>{
+
+    btnopen = e.relatedTarget
+});
+
+
+// const exampleModal = document.getElementById('exampleModal')
+// if (exampleModal) {
+//   exampleModal.addEventListener('show.bs.modal', event => {
+//     // Button that triggered the modal
+//     const btnopen = event.relatedTarget
+   
+//   })
+// }
+
+
+
+
+//Botones
 var pag=1;
 const btnAnterior = document.getElementById('btnAnterior');
 const btnSiguiente = document.getElementById('btnSiguiente');
