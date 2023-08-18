@@ -1,4 +1,3 @@
-
 //Cargando API -- Funcion Asincrona
 const CargandoPeli = async () =>{
 	//Tratando
@@ -18,7 +17,7 @@ const CargandoPeli = async () =>{
 			var vista="";
 			datos.results.forEach(peli => {
 				 vista += `
-					<div onclick="info()" class="pelicula" id="${peli.id}">
+					<div class="pelicula" id="${peli.id}">
 						<img class="poster" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}">
 						<h3 class="titulo">${peli.title}</h3>
 						<p class="blockquote-footer">${peli.overview}</p>
@@ -45,7 +44,28 @@ const CargandoPeli = async () =>{
 
 }
 //add event
-const contenedor = getEle;
+const contenedor = document.getElementById('contenedor');
+console.log(contenedor);
+
+contenedor.addEventListener('click',(e)=>{
+		console.log(e);
+});
+//
+const p= document.getElementsByClassName('pelicula'); 
+console.log(p);
+
+const p5=document.getElementsByTagName('div')[0];
+console.log(p5);
+
+// p.addEventListener('click',(e)=>{
+// 	console.log(e);
+// });
+
+const p3= document.querySelectorAll('#id').values;
+console.log(p3);
+
+// const p2= document.querySelectorAll('.pelicula');
+// console.log(p2);
 
 // var divPeli;
 // console.log(divPeli);
@@ -55,7 +75,6 @@ const contenedor = getEle;
 // 	var id=divPeli.id;
 // 	console.log(id);
 // });
-
 
 // function info(peli){
 // 	console.log(peli)
