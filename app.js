@@ -1,15 +1,17 @@
+var datos;
+
 //Cargando API -- Funcion Asincrona
 const CargandoPeli = async () =>{
 	//Tratando
 	try{
 		 		//Promesa
 		const api = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=e1d864e178ea9e978af97c6a0d6b2acb&language=es-ES&append_to_response=videos,images&page=${pag}`);
-		console.log(api);
+		// console.log(api);
 
 		if(api.status == 200){
 			
 			//opteniendo json
-			const datos = await api.json();
+			 datos = await api.json();
 			//imp datos
 			console.log(datos.results);
 			
@@ -17,10 +19,9 @@ const CargandoPeli = async () =>{
 			var vista="";
 			datos.results.forEach(peli => {
 				 vista += `
-					<div class="pelicula" id="${peli.id}">
+					<div class="pelicula" onclick="info(this.id)" id="${peli.id}">
 						<img class="poster" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}">
 						<h3 class="titulo">${peli.title}</h3>
-						<p class="blockquote-footer">${peli.overview}</p>
 					</div>
 				`;
 			});
@@ -43,61 +44,44 @@ const CargandoPeli = async () =>{
 	
 
 }
-//add event
-const contenedor = document.getElementById('contenedor');
-console.log(contenedor);
 
-contenedor.addEventListener('click',(e)=>{
-		console.log(e);
-});
-//
-const p= document.getElementsByClassName('pelicula'); 
-console.log(p);
+function info(i){
+	console.log(i);
+	var des;
+	
+   datos.results.forEach(e =>{
+	if (e.id == i) {
+		des= e;
+		// console.log(des);
+	}
+  });
+  $('#infoPeli').modal({ show:true });
 
-const p5=document.getElementsByTagName('div')[0];
-console.log(p5);
+				// HTML: Contruccion modal
+				$('#infoPeli .modal-content .js-const').html(`
+					<div class="modal-header">
+						<h4 class="col-md-4">${des.title}</h4>					
+						<div class="row">
+    						<div class="col-lg">
+       							 <img class="img-fluid" src="https://image.tmdb.org/t/p/w500/${des.backdrop_path}">
+   		 					</div>
+						</div>
+					</div>
+					
+					<div class="modal-body">
+					<ul>
+						<li>${des.overview}</li>
+						<p class="col-md-4">${des.release_date}</p>
+						</ul>
+					</div>
+				`);
+}
 
-// p.addEventListener('click',(e)=>{
-// 	console.log(e);
-// });
+// var $myModal = $('#exampleModal);
+// const modal2= document.getElementById('exampleModal');
 
-const p3= document.querySelectorAll('#id').values;
-console.log(p3);
-
-// const p2= document.querySelectorAll('.pelicula');
-// console.log(p2);
-
-// var divPeli;
-// console.log(divPeli);
-
-// divPeli.addEventListener('click', () =>{
-
-// 	var id=divPeli.id;
-// 	console.log(id);
-// });
-
-// function info(peli){
-// 	console.log(peli)
-// }
- 
-
-const btnopen= document.getElementById('open');
-
-btnopen.addEventListener('show.bs.modal',e =>{
-
-    btnopen = e.relatedTarget
-});
-
-
-// const exampleModal = document.getElementById('exampleModal')
-// if (exampleModal) {
-//   exampleModal.addEventListener('show.bs.modal', event => {
-//     // Button that triggered the modal
-//     const btnopen = event.relatedTarget
-   
-//   })
-// }
-
+// const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+// myModal.show();
 
 
 
