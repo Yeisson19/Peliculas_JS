@@ -7,3 +7,5 @@ const CargarTv = async ()=>{
 		console.log(error);
 	}
 }
+
+CargarTv();

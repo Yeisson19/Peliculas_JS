@@ -22,6 +22,7 @@ const CargandoPeli = async () =>{
 					<div class="pelicula" onclick="info(this.id)" id="${peli.id}">
 						<img class="poster" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}">
 						<h3 class="titulo">${peli.title}</h3>
+						<p class="">${peli.release_date}</p>
 					</div>
 				`;
 			});
@@ -44,7 +45,9 @@ const CargandoPeli = async () =>{
 	
 
 }
+//-----------------------------------------------
 
+//-----Modal----------//
 function info(i){
 	console.log(i);
 	var des;
@@ -72,15 +75,14 @@ function info(i){
 					<ul>
 						<li>${des.overview}</li>
 						<li>${des.genre_ids}</li>
-						<p class="col-md-4">${des.release_date}</p>
 						</ul>
 					</div>
 				`);
 }
 //--------------------------------------
-	
-//-------------------------------------------
-//Botones
+
+
+//-----------Botones---------//
 var pag=1;
 const btnAnterior = document.getElementById('btnAnterior');
 const btnSiguiente = document.getElementById('btnSiguiente');
