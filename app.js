@@ -71,20 +71,15 @@ function info(i){
 					<div class="modal-body">
 					<ul>
 						<li>${des.overview}</li>
+						<li>${des.genre_ids}</li>
 						<p class="col-md-4">${des.release_date}</p>
 						</ul>
 					</div>
 				`);
 }
-
-// var $myModal = $('#exampleModal);
-// const modal2= document.getElementById('exampleModal');
-
-// const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-// myModal.show();
-
-
-
+//--------------------------------------
+	
+//-------------------------------------------
 //Botones
 var pag=1;
 const btnAnterior = document.getElementById('btnAnterior');
