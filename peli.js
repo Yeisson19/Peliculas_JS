@@ -13,7 +13,7 @@ const CargandoPeli = async () =>{
 			//opteniendo json
 			 datos = await api.json();
 			//imp datos
-			console.log(datos.results);
+			// console.log(datos.results);
 			
 			
 			var vista="";
@@ -45,6 +45,11 @@ const CargandoPeli = async () =>{
 	
 
 }
+
+
+//callfuntion
+CargandoPeli();
+
 //-----------------------------------------------
 
 //-----Modal----------//
@@ -80,28 +85,65 @@ function info(i){
 				`);
 }
 //--------------------------------------
+  //pag -> paginas q mostrara
+var pag=1;
+     //ub -> ub de la pagina 
+var  ub=pag;
 
+$('#pagination').html(`
+
+
+<nav aria-label="Page navigation example">
+<ul class="pagination">
+  <li class="page-item"><a class="page-link">Previous</a></li>
+  <li class="page-item"><a class="page-link" onclick="pagination(this.id)" id="${ub}">${ub}</a></li>
+  <li class="page-item"><a class="page-link" onclick="pagination(this.id)" id="${ub+1}">${ub+1}</a></li>
+  <li class="page-item"><a class="page-link" onclick="pagination(this.id)" id="${ub+2}">${ub+2}</a></li> 
+  <li class="page-item"><a class="page-link" onclick="pagination(this.id)" id="${ub+3}">${ub+3}</a></li> 
+  <li class="page-item"><a class="page-link" onclick="pagination(this.id)" id="${ub+4}">${ub+4}</a></li> 
+  <li class="page-item"><a class="page-link">Next</a></li>
+</ul>
+</nav>
+
+`);
+
+function pagination(n){
+	console.log(n);
+	pag = n;
+
+	CargandoPeli();
+}
+
+pagination();
 
 //-----------Botones---------//
-var pag=1;
-const btnAnterior = document.getElementById('btnAnterior');
-const btnSiguiente = document.getElementById('btnSiguiente');
+// const btnAnterior = document.getElementById('btnAnterior');
+// const btnSiguiente = document.getElementById('btnSiguiente');
 
-btnAnterior.addEventListener('click',()=>{
+// btnAnterior.addEventListener('click',()=>{
 	
-	if( pag > 1 ){
-		pag -= 1;
-		CargandoPeli();
-	}
-});
+// 	if( pag > 1 ){
+// 		pag -= 1;
+// 		CargandoPeli();
+// 	}
+// });
 
-btnSiguiente.addEventListener('click',()=>{
+// btnSiguiente.addEventListener('click',()=>ñ{
 
-	if(pag < 1000){
-		pag += 1;
-		CargandoPeli();
-	}
-});
+// 	if(pag < 1000){
+// 		pag += 1;
+// 		CargandoPeli();
+// 	}
+// });
 
-//callfuntion
-CargandoPeli();
+// $('#demo').pagination({
+//     dataSource: [1, 2, 3, 4, 5, 6, 7],
+//     pageSize: 5,
+//     showPrevious: false,
+//     showNext: false,
+//     callback: function(data, pagination) {
+//         // template method of yourself
+//         var html = template(data);
+//         dataContainer.html(html);
+//     }
+// });
