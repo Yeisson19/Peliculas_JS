@@ -28,8 +28,6 @@ const CargandoPeli = async () =>{
 			});
 
 			document.getElementById('contenedor').innerHTML = vista;
-
-			console.log("exitosa coneccion");
 		}
 		else{
 			console.log("Hay un error de coneccion");
@@ -88,62 +86,71 @@ function info(i){
   //pag -> paginas q mostrara
 var pag=1;
      //ub -> ub de la pagina 
-var  ub=pag;
+var  ub=0;
+var final;
 
-$('#pagination').html(`
+$(document).ready(nav);
 
+function nav(){
+	$('#pagination').html(`
 
-<nav aria-label="Page navigation example">
-<ul class="pagination">
-  <li class="page-item"><a class="page-link">Previous</a></li>
-  <li class="page-item"><a class="page-link" onclick="pagination(this.id)" id="${ub}">${ub}</a></li>
-  <li class="page-item"><a class="page-link" onclick="pagination(this.id)" id="${ub+1}">${ub+1}</a></li>
-  <li class="page-item"><a class="page-link" onclick="pagination(this.id)" id="${ub+2}">${ub+2}</a></li> 
-  <li class="page-item"><a class="page-link" onclick="pagination(this.id)" id="${ub+3}">${ub+3}</a></li> 
-  <li class="page-item"><a class="page-link" onclick="pagination(this.id)" id="${ub+4}">${ub+4}</a></li> 
-  <li class="page-item"><a class="page-link">Next</a></li>
-</ul>
-</nav>
+	<nav aria-label="nav-movi">
+	<ul class="pagination justify-content-center">
+	  <li class="page-item"><a class="page-link" onclick="Anterior()" href="#">Previous</a></li>
+	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${Number(ub)+Number(1)}">${Number(ub)+Number(1)}</a></li>
+	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${Number(ub)+Number(2)}">${Number(ub)+Number(2)}</a></li> 
+	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${Number(ub)+Number(3)}">${Number(ub)+Number(3)}</a></li> 
+	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${Number(ub)+Number(4)}">${Number(ub)+Number(4)}</a></li> 
+	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${Number(ub)+Number(5)}">${Number(ub)+Number(5)}</a></li> 
+	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${Number(ub)+Number(6)}">${Number(ub)+Number(6)}</a></li> 
+	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${Number(ub)+Number(7)}">${Number(ub)+Number(7)}</a></li> 
+	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${Number(ub)+Number(8)}">${Number(ub)+Number(8)}</a></li> 
+	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${Number(ub)+Number(9)}">${Number(ub)+Number(9)}</a></li> 
+	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${Number(ub)+Number(10)}">${Number(ub)+Number(10)}</a></li> 
+	  <li class="page-item"><a class="page-link" onclick="Siguiente()" href="#">Next</a></li>
+	</ul>
+	</nav>
+	
+	`);
+}
 
-`);
 
 function pagination(n){
 	console.log(n);
+	// console.log(ub);
 	pag = n;
+
+	if (pag == 10 || pag == 20 || pag == 30 || pag == 40 || pag == 50 || pag == 60 || pag == 70 || pag == 80 || pag == 90) {
+		//cambia los valores de paginacion
+		ub=pag;
+		//N° final de la paginacion
+		final=Number(ub)+Number(10);
+		console.log(ub);
+		console.log(final);
+		nav();
+	}
 
 	CargandoPeli();
 }
 
-pagination();
 
 //-----------Botones---------//
-// const btnAnterior = document.getElementById('btnAnterior');
-// const btnSiguiente = document.getElementById('btnSiguiente');
+// const btnAnterior = document.getElementById('Anterior');
+// const btnSiguiente = document.getElementById('Siguiente');
 
-// btnAnterior.addEventListener('click',()=>{
+function Anterior(){
 	
-// 	if( pag > 1 ){
-// 		pag -= 1;
-// 		CargandoPeli();
-// 	}
-// });
+	if( pag > 1 ){
+		pag -= 1;
+		CargandoPeli();
+	}
+}
 
-// btnSiguiente.addEventListener('click',()=>ñ{
+function Siguiente(){
 
-// 	if(pag < 1000){
-// 		pag += 1;
-// 		CargandoPeli();
-// 	}
-// });
+	if(pag < 1000){
+		pag += 1;
+		CargandoPeli();
+	}
+}
 
-// $('#demo').pagination({
-//     dataSource: [1, 2, 3, 4, 5, 6, 7],
-//     pageSize: 5,
-//     showPrevious: false,
-//     showNext: false,
-//     callback: function(data, pagination) {
-//         // template method of yourself
-//         var html = template(data);
-//         dataContainer.html(html);
-//     }
-// });
