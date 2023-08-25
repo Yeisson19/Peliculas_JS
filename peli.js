@@ -13,19 +13,27 @@ const CargandoPeli = async () =>{
 			//opteniendo json
 			 datos = await api.json();
 			//imp datos
-			// console.log(datos.results);
-			
+			console.log(datos.results);
+			var fecha;
+			var fecha2;
 			
 			var vista="";
 			datos.results.forEach(peli => {
+				fecha=peli.release_date;
+				fecha2= formato(fecha);
+
 				 vista += `
 					<div class="pelicula" onclick="info(this.id)" id="${peli.id}">
 						<img class="poster" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}">
 						<h3 class="titulo">${peli.title}</h3>
-						<p class="text-muted">${peli.release_date}</p>
+						<p class="text-muted">${fecha2}</p>
 					</div>
 				`;
 			});
+			
+			function formato(fecha){
+				return fecha.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
+			  }
 
 			document.getElementById('contenedor').innerHTML = vista;
 		}
@@ -41,7 +49,7 @@ const CargandoPeli = async () =>{
 	}
 
 	
-
+	$('#pagina').html(`<a>${pag}</a>`);
 }
 
 
@@ -78,7 +86,6 @@ function info(i){
 					<div class="modal-body">
 					<ul>
 						<li>${des.overview}</li>
-						<li>${des.genre_ids}</li>
 						</ul>
 					</div>
 				`);
@@ -112,7 +119,7 @@ function nav(){
 	}
 	
 	if(escrol==false){onevalue= Number(ub[0])- Number(1);}
-	console.log("ub=" + ub[i]);
+	// console.log("ub=" + ub[i]);
    }
 	$('#pagination').html(`
 
@@ -144,9 +151,10 @@ function nav(){
 	</nav>
 	
 	`);
-	//
-	console.log("valor q deve iniciar: " + n);
-	console.log("Primer valor: " + onevalue);
+	
+	
+	// console.log("valor q deve iniciar: " + n);
+	// console.log("Primer valor: " + onevalue);
     if(escrol==true){onevalue= n;}
 	escrol=false;
 }
@@ -172,15 +180,12 @@ document.body.addEventListener('load', function() {
 function pagination(n){
 
 	pag = n;
-    var final;
-	console.log(n);
+	// console.log(n);
 	// console.log(ub);
 
 	if (pag == 10 || pag == 20 || pag == 30 || pag == 40 || pag == 50 || pag == 60 || pag == 70 || pag == 80 || pag == 90) {
-		//N° final de la paginacion
-		final=Number(pag)+Number(10);
+		
 		// console.log(ub);
-		console.log(final);
 		nav();
 	}
 
