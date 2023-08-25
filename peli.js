@@ -22,7 +22,7 @@ const CargandoPeli = async () =>{
 					<div class="pelicula" onclick="info(this.id)" id="${peli.id}">
 						<img class="poster" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}">
 						<h3 class="titulo">${peli.title}</h3>
-						<p class="">${peli.release_date}</p>
+						<p class="text-muted">${peli.release_date}</p>
 					</div>
 				`;
 			});
@@ -45,9 +45,10 @@ const CargandoPeli = async () =>{
 }
 
 
-//callfuntion
+//calling the funtion
 CargandoPeli();
-
+//callnav
+$(document).ready(nav);
 //-----------------------------------------------
 
 //-----Modal----------//
@@ -84,9 +85,12 @@ function info(i){
 }
 //--------------------------------------
   //pag -> paginas q mostrara
-var pag=1;
+var pag=1;//5
+let escrol = false;
+var onevalue=0;
+var n=0;
 
-$(document).ready(nav);
+
 function nav(){
 //ub -> ub de la pagina 
   let ub=[];
@@ -97,17 +101,32 @@ function nav(){
 	if(pag==1 && i==0){
 		ub[i]=pag;//1
 	}
-	else{
-	ub[i]=Number(pag)+Number(i);
+    if(pag == 1 && i != 0){
+	ub[i]=Number(pag)+Number(i);//2,3,4...
+	}
+	if(pag !=1 && escrol == false){
+	ub[i]=Number(pag)+Number(i+1);//11,12...
+	}
+	if(escrol == true){
+		ub[i]= Number(n) + Number(i+1);
 	}
 	
+	if(escrol==false){onevalue= Number(ub[0])- Number(1);}
 	console.log("ub=" + ub[i]);
    }
 	$('#pagination').html(`
 
 	<nav aria-label="nav-movi">
 	<ul class="pagination justify-content-center">
-	  <li class="page-item " id="Anterior"><a class="page-link" onclick="Anterior()" href="#" tabindex="-1">Previous</a></li>
+
+	<li class="page-item">
+	<a class="page-link" href="#" aria-label="Previous"  onclick="BackPag()">
+	  <span aria-hidden="true">&laquo;</span>
+	  <span class="sr-only"></span>
+	</a>
+    </li>
+
+	  <li class="page-item" id="Anterior"><a class="page-link" onclick="Anterior()" href="#">Anterior</a></li>
 	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${ub[0]}">${ub[0]}</a></li>
 	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${ub[1]}">${ub[1]}</a></li> 
 	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${ub[2]}">${ub[2]}</a></li> 
@@ -118,12 +137,18 @@ function nav(){
 	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${ub[7]}">${ub[7]}</a></li> 
 	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${ub[8]}">${ub[8]}</a></li> 
 	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${ub[9]}">${ub[9]}</a></li> 
-	  <li class="page-item"><a class="page-link" onclick="Siguiente()" href="#">Next</a></li>
+	  <li class="page-item"><a class="page-link" onclick="Siguiente()" href="#">Siguiente</a></li>
+	
+
 	</ul>
 	</nav>
 	
 	`);
-
+	//
+	console.log("valor q deve iniciar: " + n);
+	console.log("Primer valor: " + onevalue);
+    if(escrol==true){onevalue= n;}
+	escrol=false;
 }
 
 document.body.addEventListener('load', function() {
@@ -164,8 +189,6 @@ function pagination(n){
 
 
 //-----------Botones---------//
-// const btnAnterior = document.getElementById('Anterior');
-// const btnSiguiente = document.getElementById('Siguiente');
 
 function Anterior(){
 	
@@ -183,3 +206,10 @@ function Siguiente(){
 	}
 }
 
+function BackPag(){
+	if(onevalue>=10){
+	escrol = true;
+	n=Number(onevalue) - Number(10);
+	nav();
+	}
+}
