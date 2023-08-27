@@ -14,26 +14,21 @@ const CargandoPeli = async () =>{
 			 datos = await api.json();
 			//imp datos
 			console.log(datos.results);
-			var fecha;
-			var fecha2;
+			//numero a identificar
 			
 			var vista="";
 			datos.results.forEach(peli => {
-				fecha=peli.release_date;
-				fecha2= formato(fecha);
+				var fecha=peli.release_date;
+				var fecha2= formato(fecha);
 
 				 vista += `
-					<div class="pelicula" onclick="info(this.id)" id="${peli.id}">
-						<img class="poster" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}">
+					<div class="pelicula" id="${peli.id}">
+						<img class="poster" id="${peli.id}" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}">
 						<h3 class="titulo">${peli.title}</h3>
 						<p class="text-muted">${fecha2}</p>
 					</div>
 				`;
 			});
-			
-			function formato(fecha){
-				return fecha.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
-			  }
 
 			document.getElementById('contenedor').innerHTML = vista;
 		}
@@ -52,17 +47,24 @@ const CargandoPeli = async () =>{
 	$('#pagina').html(`<a>${pag}</a>`);
 }
 
+//----Fecha---
+function formato(fecha){
+	return fecha.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
+  }
 
+//---
+//-----------------------------------------------
 //calling the funtion
 CargandoPeli();
 //callnav
 $(document).ready(nav);
 //-----------------------------------------------
 
+
 //-----Modal----------//
 function info(i){
-	console.log(i);
-	var des;
+	// console.log(i);
+	let des;
 	
    datos.results.forEach(e =>{
 	if (e.id == i) {
@@ -93,7 +95,7 @@ function info(i){
 //--------------------------------------
   //pag -> paginas q mostrara
 var pag=1;//5
-let escrol = false;
+var escrol = false;
 var onevalue=0;
 var n=0;
 
@@ -159,9 +161,6 @@ function nav(){
 	escrol=false;
 }
 
-document.body.addEventListener('load', function() {
-    console.log('La página ha terminado de cargarse!!');
-});
 
 // document.body
 // function off(){
@@ -218,3 +217,41 @@ function BackPag(){
 	nav();
 	}
 }
+
+var movi_id= document.getElementById('contenedor').addEventListener('click',(e)=>{
+
+// 	if (e.target.matches('div.pelicula') || e.target.matches('h3.titulo') || e.target.matches('p.text-muted')) {
+// 		// Ejecuta solo si el elemento que fue clickeado tiene la clase caja.
+// 		console.log(`Hiciste click en la caja ${e.target.innerText}`);
+// 		let idDelElemento = e.target.id;
+// console.log(idDelElemento);
+// info(idDelElemento);
+// 	}
+
+if(e.target && e.target.tagName == 'IMG'){
+	let idDelElemento = e.target.id;
+console.log(idDelElemento);
+info(idDelElemento);
+}
+
+// 	if (e.target.classList.contains("pelicula")) {
+// 		// Ejecuta solo si el elemento que fue clickeado tiene la clase caja.
+// 		// console.log(`Hiciste click en la caja ${e.target.innerText}`);
+// 		let idDelElemento = e.target.id;
+// console.log(idDelElemento);
+// info(idDelElemento);
+// 	}
+
+
+
+// if(e.target && e.target.tagName == 'DIV'){
+// 	// e.target.classList.toggle('activo');
+// 	console.log("click en div");
+// 	console.log(e);
+// }
+});
+
+// let contenido= document.querySelectorAll('.titulo ');
+// console.log(contenido);
+
+// contenido.addEventListener

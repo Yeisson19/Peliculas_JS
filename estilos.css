@@ -14,7 +14,6 @@ body {
 	width: 90%;
 	max-width: 1000px;
 	margin: 40px auto 100px auto;
-
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 40px;
@@ -22,6 +21,9 @@ body {
 
 .contenedor .pelicula {
 	text-align: center;
+	border-color:#100a1f;
+	border-style: double;
+	border-radius: 15px;
 }
 
 .contenedor .pelicula .titulo {
@@ -66,6 +68,7 @@ body {
 .paginacion button:hover {
 	background: #137c32;
 }
+
 
 .btn-circle {
     width: 30px;
