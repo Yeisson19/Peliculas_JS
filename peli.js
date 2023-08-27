@@ -118,6 +118,7 @@ function nav(){
 	}
 	if(escrol == true){
 		ub[i]= Number(n) + Number(i+1);
+
 	}
 	
 	if(escrol==false){onevalue= Number(ub[0])- Number(1);}
@@ -135,7 +136,7 @@ function nav(){
 	</a>
     </li>
 
-	  <li class="page-item" id="Anterior"><a class="page-link" onclick="Anterior()" href="#">Anterior</a></li>
+	  <li class="page-item"><a class="page-link" href="#" id="Anterior">Anterior</a></li>
 	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${ub[0]}">${ub[0]}</a></li>
 	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${ub[1]}">${ub[1]}</a></li> 
 	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${ub[2]}">${ub[2]}</a></li> 
@@ -145,16 +146,30 @@ function nav(){
 	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${ub[6]}">${ub[6]}</a></li> 
 	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${ub[7]}">${ub[7]}</a></li> 
 	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${ub[8]}">${ub[8]}</a></li> 
-	  <li class="page-item"><a class="page-link" href="#" onclick="pagination(this.id)" id="${ub[9]}">${ub[9]}</a></li> 
-	  <li class="page-item"><a class="page-link" onclick="Siguiente()" href="#">Siguiente</a></li>
+	  <li class="page-item"><a class="page-link ultima" href="#" id="${ub[9]}">${ub[9]}</a></li> 
+	  <li class="page-item"><a class="page-link" href="#" id="Siguiente">Siguiente</a></li>
 	
 
 	</ul>
-	</nav>
-	
-	`);
-	
-	
+	</nav>`);
+
+	//-----------Botones---------//
+const btnAnterior= document.getElementById('Anterior');
+btnAnterior.addEventListener('click',()=>{
+	// console.log("antrerior");
+	if( pag > 1 ){
+		pag -= 1;
+		CargandoPeli();
+	}
+});
+const btnSiguiente= document.getElementById('Siguiente');
+btnSiguiente.addEventListener('click',()=>{
+
+	if(pag < 1000){
+		pag += 1;
+		CargandoPeli();
+	}
+});
 	// console.log("valor q deve iniciar: " + n);
 	// console.log("Primer valor: " + onevalue);
     if(escrol==true){onevalue= n;}
@@ -181,34 +196,22 @@ function pagination(n){
 	pag = n;
 	// console.log(n);
 	// console.log(ub);
+	const ultima= document.querySelector('.ultima');
+	ultima.addEventListener('click',()=>{
+		for (let y = 0; y < 100; y+=10) {
+			if(pag == y){
+				nav();
+			}
+			
+		}
 
-	if (pag == 10 || pag == 20 || pag == 30 || pag == 40 || pag == 50 || pag == 60 || pag == 70 || pag == 80 || pag == 90) {
-		
-		// console.log(ub);
-		nav();
-	}
+	});
+	
 
 	CargandoPeli();
 }
 
 
-//-----------Botones---------//
-
-function Anterior(){
-	
-	if( pag > 1 ){
-		pag -= 1;
-		CargandoPeli();
-	}
-}
-
-function Siguiente(){
-
-	if(pag < 1000){
-		pag += 1;
-		CargandoPeli();
-	}
-}
 
 function BackPag(){
 	if(onevalue>=10){
