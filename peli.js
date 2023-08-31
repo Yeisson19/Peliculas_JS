@@ -1,4 +1,6 @@
 var datos;
+// document.body.scrollTop = 5;
+window.scrollTo(0, 1000);
 
 //Cargando API -- Funcion Asincrona
 const CargandoPeli = async () =>{
@@ -54,10 +56,10 @@ function formato(fecha){
 //-----------------------------------------------
 //calling the funtion
 CargandoPeli();
-//Mostrar paginacion
-$(document).ready(MostrarPag);
+// scroll(0,100);
 //callnav
 $(document).ready(nav);
+setTimeout(MostrarPag,1000);
 //-----------------------------------------------
 
 //----Opteniendo ID Peli---
@@ -161,6 +163,7 @@ function nav(){
 	// console.log("Primer valor: " + onevalue);
 	if(escrol==true){onevalue= n;}
 	   escrol=false;
+
 }
 
 //-------Numeracion-----------
@@ -172,42 +175,32 @@ function Numeracion(ub,a){
 	y++;
 	});
 }
-//---------Click en Pag---------
+//---------Click en Paginacion---------
 function Pag(a){
 	
     a.forEach((num) => {
 		num.addEventListener('click', (e) => {
 		
-			var z =e.target.innerText;
-			pagination(z);
-			console.log(z);
+			var n =e.target.innerText;
+			console.log("pag= "+n);
+			pag=n;
+			
+			CargandoPeli();
 		}); 
 	});
 }
 
-//----------
-function pagination(n){
-
-	pag = n;
-	// console.log(n);
-	// console.log(ub);
-	
-	
-
-	CargandoPeli();
-}
-
+//----------Ultimo numero en la  paginacion----
 const ultima= document.getElementById('ultima');
 	ultima.addEventListener('click',()=>{
 		for (let y = 0; y < 100; y+=10) {
+			console.log(`valor de y:${y}`);
 			if(pag == y){
-				console.log("click a ultima");
 				nav();
+				break;
 			}
 		}
-
 	});
-
 
 		//-----------Botones---------//
 const btnAnterior= document.getElementById('Anterior');
@@ -220,14 +213,13 @@ btnAnterior.addEventListener('click',()=>{
 });
 const btnSiguiente= document.getElementById('Siguiente');
 btnSiguiente.addEventListener('click',()=>{
-
 	if(pag < 1000){
 		pag += 1;
 		CargandoPeli();
 	}
 });
 
-
+//------------Retroceso de la navegacion en la paginacion----
 const BackPag = document.getElementById('BackPag').addEventListener('click',()=>{
 
 	if(onevalue>=10){
@@ -235,7 +227,18 @@ const BackPag = document.getElementById('BackPag').addEventListener('click',()=>
 		n=Number(onevalue) - Number(10);
 		nav();
 		}
-
 });
 
 
+// window.scroll({
+// 	top: 100,
+// 	behavior: "smooth"
+//   });
+// window.scroll({
+// 	// top: 100,
+// 	Bottom:100,
+// 	// left: 100,
+// 	behavior: "smooth"
+//   });
+  console.log(document.body.scrollTop);
+  
