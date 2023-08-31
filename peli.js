@@ -1,7 +1,4 @@
 var datos;
-// document.body.scrollTop = 5;
-window.scrollTo(0, 1000);
-
 //Cargando API -- Funcion Asincrona
 const CargandoPeli = async () =>{
 	//Tratando
@@ -22,13 +19,26 @@ const CargandoPeli = async () =>{
 				var fecha=peli.release_date;
 				var fecha2= formato(fecha);
 
-				 vista += `
-					<div class="pelicula" id="${peli.id}">
-						<img class="poster" id="${peli.id}" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}">
-						<h3 class="titulo">${peli.title}</h3>
-						<p class="text-muted">${fecha2}</p>
-					</div>
+				//  vista += `
+				// 	<div class="col-4 m-auto pelicula">
+				// 		<img class="poster" id="${peli.id}" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}">
+				// 		<h3 class="titulo">${peli.title}</h3>
+				// 		<p class="text-muted">${fecha2}</p>
+				// 	</div>
+				// `;
+
+				vista += `
+			<div class="col col-sm-6 col-md-4 col-lg-3 col-xl-2">
+				<div class="card">
+					<img class="card-img-top" id="${peli.id}" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}" alt="Card image cap">
+				<div class="card-body">
+				 	<h5 class="card-title">${peli.title}</h5>
+						<p class="text-muted">${fecha2}</p>  	
+				</div>
+			  </div>
+			</div>
 				`;
+
 			});
 
 			document.getElementById('contenedor').innerHTML = vista;
@@ -55,8 +65,9 @@ function formato(fecha){
 
 //-----------------------------------------------
 //calling the funtion
-CargandoPeli();
-// scroll(0,100);
+CargandoPeli().then(_=>{
+	window.scrollTo(0, 1000);
+});
 //callnav
 $(document).ready(nav);
 setTimeout(MostrarPag,1000);
@@ -230,15 +241,4 @@ const BackPag = document.getElementById('BackPag').addEventListener('click',()=>
 });
 
 
-// window.scroll({
-// 	top: 100,
-// 	behavior: "smooth"
-//   });
-// window.scroll({
-// 	// top: 100,
-// 	Bottom:100,
-// 	// left: 100,
-// 	behavior: "smooth"
-//   });
-  console.log(document.body.scrollTop);
   
