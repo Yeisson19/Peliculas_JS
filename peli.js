@@ -12,32 +12,25 @@ const CargandoPeli = async () =>{
 			//opteniendo json
 			 datos = await api.json();
 			//imp datos
-			// console.log(datos.results);
+			console.log(datos.results);
 			
 			var vista="";
 			datos.results.forEach(peli => {
 				var fecha=peli.release_date;
 				var fecha2= formato(fecha);
 
-				//  vista += `
-				// 	<div class="col-4 m-auto pelicula">
-				// 		<img class="poster" id="${peli.id}" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}">
-				// 		<h3 class="titulo">${peli.title}</h3>
-				// 		<p class="text-muted">${fecha2}</p>
-				// 	</div>
-				// `;
-
 				vista += `
-			<div class="col col-sm-6 col-md-4 col-lg-3 col-xl-2">
-				<div class="card">
+			<div class="col col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-3">
+			 	<div class="card" class="w-100">
 					<img class="card-img-top" id="${peli.id}" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}" alt="Card image cap">
-				<div class="card-body">
-				 	<h5 class="card-title">${peli.title}</h5>
-						<p class="text-muted">${fecha2}</p>  	
+					<div class="card-body" style="height: 100%;">
+				 		<h6 class="card-title text-center">${peli.title}</h6>
+						<p class="text-muted text-center"><small>${fecha2}</small></p>
+	                <button type="button" class="btn btn-outline-success btn-sm circulo">${peli.vote_average}</button>
+						
+					</div> 
 				</div>
-			  </div>
-			</div>
-				`;
+		    </div>`;
 
 			});
 
@@ -55,7 +48,7 @@ const CargandoPeli = async () =>{
 	}
 
 	
-	$('#pagina').html(`<a>${pag}</a>`);
+	document.getElementById('pagina').innerText= `${pag}`;
 }
 
 //----Fecha---

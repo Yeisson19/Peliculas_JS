@@ -1,3 +1,7 @@
 .ocultar{
 	display: none;
 }
+.circulo{
+	border-radius: 25px 25px;
+
+}
