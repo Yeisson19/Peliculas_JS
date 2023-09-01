@@ -21,7 +21,7 @@ const CargandoPeli = async () =>{
 
 				vista += `
 			<div class="col col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-3">
-			 	<div class="card" class="w-100">
+			 	<div class="card " id="tarjeta">
 					<img class="card-img-top" id="${peli.id}" src="https://image.tmdb.org/t/p/w500/${peli.poster_path}" alt="Card image cap">
 					<div class="card-body" style="height: 100%;">
 				 		<h6 class="card-title text-center">${peli.title}</h6>
@@ -30,8 +30,8 @@ const CargandoPeli = async () =>{
 						
 					</div> 
 				</div>
+			
 		    </div>`;
-
 			});
 
 			document.getElementById('contenedor').innerHTML = vista;
@@ -58,16 +58,14 @@ function formato(fecha){
 
 //-----------------------------------------------
 //calling the funtion
-CargandoPeli().then(_=>{
-	window.scrollTo(0, 1000);
-});
+CargandoPeli();
 //callnav
 $(document).ready(nav);
 setTimeout(MostrarPag,1000);
 //-----------------------------------------------
 
 //----Opteniendo ID Peli---
-var movi_id= document.getElementById('contenedor').addEventListener('click',(e)=>{
+document.getElementById('contenedor').addEventListener('click',(e)=>{
 
 	if(e.target && e.target.tagName == 'IMG'){
 		let idDelElemento = e.target.id;
@@ -215,6 +213,7 @@ btnAnterior.addEventListener('click',()=>{
 		CargandoPeli();
 	}
 });
+
 const btnSiguiente= document.getElementById('Siguiente');
 btnSiguiente.addEventListener('click',()=>{
 	if(pag < 1000){
@@ -232,6 +231,18 @@ const BackPag = document.getElementById('BackPag').addEventListener('click',()=>
 		nav();
 		}
 });
+
+let card = document.querySelectorAll('.card');
+
+document.getElementById('tarjeta').addEventListener('click',()=>{
+	console.log("encima");
+	card.classList.add('border border-success');
+});
+// document.getElementById('tarjeta').addEventListener('mouseout',()=>{
+// 	console.log("fuera");
+
+// 	card.classList.remove('border border-success');
+// });
 
 
   
